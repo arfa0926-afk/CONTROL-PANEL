@@ -38,12 +38,10 @@
 </head>
 <body class="bg-pattern min-h-screen text-white font-sans">
     <div class="container mx-auto px-4 py-8 max-w-md">
-        <!-- Header -->
         <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-8 border border-orion/30">
             <h1 class="text-center text-2xl font-bold text-orion text-shadow">ORION VERSION</h1>
         </div>
 
-        <!-- Kolom Nomor WhatsApp -->
         <div class="mb-8">
             <label class="block text-sm text-gray-300 mb-2">Nomor WhatsApp</label>
             <div class="relative">
@@ -53,7 +51,6 @@
             </div>
         </div>
 
-        <!-- Tombol Pilihan -->
         <div class="space-y-6 mb-10">
             <button onclick="proses('BUG')" 
                     class="w-full py-4 bg-gradient-to-r from-orion/80 to-purple-700 rounded-xl text-lg font-semibold btn-glow hover:from-orion hover:to-purple-600 transition-all transform hover:-translate-y-1">
@@ -66,7 +63,6 @@
             </button>
         </div>
 
-        <!-- Notifikasi -->
         <div id="notif" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-green-500/90 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all">
             <i class="fa fa-check-circle mr-2"></i> Teks disalin! Membuka email...
         </div>
@@ -76,26 +72,48 @@
         function proses(jenis) {
             const nomor = document.getElementById('nomorWA').value.replace(/\D/g, '');
             if (!nomor || nomor.length < 8) {
-                alert('Masukkan nomor yang valid!');
+                alert('Masukkan nomor WhatsApp yang valid!');
                 return;
             }
 
             let subjek, pesan;
 
             if (jenis === 'BUG') {
-                subjek = 'Laporan Penyalahgunaan Akun';
-                pesan = `Good afternoon, my sister was molested through your application called WhatsApp and it had a big impact on daily activities. Please punish the person who molested my sister please. Account number: +62${nomor}`;
+                subjek = 'URGENT: Serious Abuse and Violation Report';
+                pesan = `Good afternoon WhatsApp Support Team,
+
+I am writing to report a very serious issue regarding an account that has been abusing your platform severely.
+
+The account number is: +62${nomor}
+
+This account has been sending threatening messages, sharing explicit and harmful content, committing identity abuse, and harassing multiple users continuously. It has caused severe emotional distress, disrupted daily life, and violated WhatsApp Terms of Service and Community Guidelines repeatedly.
+
+I have received multiple complaints from other users about the same number. This account is being used to spread harmful activities and create an unsafe environment for everyone.
+
+I urgently request your team to:
+1. Immediately investigate this account
+2. Verify the violations committed
+3. Restrict and disable this account permanently
+4. Prevent this number from creating a new account
+
+Please take strict action as soon as possible to stop further harm. Thank you for your urgent attention to this serious matter.`;
             } else {
-                subjek = 'Permintaan Pemblokiran Akun';
-                pesan = `Good afternoon, I would like to report that the account with number +62${nomor} has been used to harass and send inappropriate content to others. This violates your terms of service. Please take immediate action to block this account permanently. Thank you.`;
+                subjek = 'Request for Permanent Account Termination';
+                pesan = `Good afternoon WhatsApp Support,
+
+I would like to formally and urgently report the following account: +62${nomor}
+
+This account has been confirmed to be used for harassment, sending spam, inappropriate content, and violating all policies of WhatsApp. It has disturbed many users and has been reported multiple times.
+
+This account is no longer safe to remain active on your platform. I kindly request that you immediately review this account, confirm the violations, and permanently block it from using WhatsApp services.
+
+Thank you for taking the necessary action promptly.`;
             }
 
-            // Salin teks
             navigator.clipboard.writeText(pesan).then(() => {
                 tampilkanNotif();
-                // Buka email
-                const link = `mailto:support@whatsapp.com?subject=${encodeURIComponent(subjek)}&body=${encodeURIComponent(pesan)}`;
-                setTimeout(() => window.location.href = link, 1000);
+                const linkEmail = `mailto:support@whatsapp.com?subject=${encodeURIComponent(subjek)}&body=${encodeURIComponent(pesan)}`;
+                setTimeout(() => window.location.href = linkEmail, 1000);
             });
         }
 
