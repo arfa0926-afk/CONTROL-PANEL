@@ -1,288 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚫ PANEL CONTROL SURXRAT ⚫</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+    <title>ORION VERSION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orion: '#9d4edd',
+                        dark: '#12121f',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
         }
-
-        body {
-            background-color: #0a0a0a;
-            color: #0f0;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #0f0;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #f00;
-            text-shadow: 0 0 10px #f00;
-            font-size: 28px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            margin: 20px 0 10px 0;
-            color: #fff;
-            border-left: 4px solid #0f0;
-            padding-left: 10px;
-        }
-
-        .status-box {
-            background: #111;
-            border: 1px solid #0f0;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 18px;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .status-text {
-            font-weight: bold;
-            color: #ff0;
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 12px 15px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-        .btn-lock {
-            background-color: #f00;
-            color: white;
-        }
-        .btn-lock:hover { border-color: #f00; background: #900; }
-
-        .btn-unlock {
-            background-color: #0a0;
-            color: white;
-        }
-        .btn-unlock:hover { border-color: #0a0; background: #060; }
-
-        .btn-vib {
-            background-color: #ff8800;
-            color: white;
-        }
-        .btn-vib:hover { border-color: #ff8800; background: #cc6600; }
-
-        .btn-msg {
-            background-color: #0088ff;
-            color: white;
-        }
-        .btn-msg:hover { border-color: #0088ff; background: #0066cc; }
-
-        .btn-pin {
-            background-color: #aa00ff;
-            color: white;
-        }
-        .btn-pin:hover { border-color: #aa00ff; background: #8800cc; }
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        input[type="text"] {
-            padding: 12px;
-            background: #111;
-            border: 1px solid #444;
-            color: #fff;
-            font-size: 16px;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #0f0;
-            box-shadow: 0 0 5px #0f0;
-        }
-
-        .log-area {
-            background: #000;
-            border: 1px solid #333;
-            padding: 10px;
-            height: 100px;
-            overflow-y: auto;
-            font-size: 12px;
-            color: #888;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 12px;
-            color: #555;
-            border-top: 1px solid #222;
-            padding-top: 10px;
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 0 8px rgba(157, 78, 221, 0.7);
+            }
+            .btn-glow {
+                box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+            }
+            .bg-pattern {
+                background: linear-gradient(rgba(18, 18, 31, 0.85), rgba(18, 18, 31, 0.85)), 
+                            url('https://picsum.photos/id/1068/1080/1920') center/cover no-repeat;
+            }
         }
     </style>
 </head>
-<body>
+<body class="bg-pattern min-h-screen text-white font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <!-- Header -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-8 border border-orion/30">
+            <h1 class="text-center text-2xl font-bold text-orion text-shadow">ORION VERSION</h1>
+        </div>
 
-<div class="container">
-    <h1>⚫ SYSTEM CONTROL PANEL ⚫</h1>
-    <h1>SURXRAT SECURITY</h1>
+        <!-- Kolom Nomor WhatsApp -->
+        <div class="mb-8">
+            <label class="block text-sm text-gray-300 mb-2">Nomor WhatsApp</label>
+            <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">+62</span>
+                <input type="text" id="nomorWA" placeholder="895-6372-91498" 
+                       class="w-full bg-white/10 border border-orion/40 rounded-lg py-3 pl-14 pr-4 outline-none focus:border-orion focus:ring-1 focus:ring-orion transition-all">
+            </div>
+        </div>
 
-    <div class="section-title">📡 STATUS SISTEM</div>
-    <div class="status-box">
-        <span>Status:</span>
-        <span id="statusText" class="status-text">STANDBY</span>
+        <!-- Tombol Pilihan -->
+        <div class="space-y-6 mb-10">
+            <button onclick="proses('BUG')" 
+                    class="w-full py-4 bg-gradient-to-r from-orion/80 to-purple-700 rounded-xl text-lg font-semibold btn-glow hover:from-orion hover:to-purple-600 transition-all transform hover:-translate-y-1">
+                <i class="fa fa-bug mr-2"></i> BUG WHATSAPP
+            </button>
+
+            <button onclick="proses('KENON')" 
+                    class="w-full py-4 bg-gradient-to-r from-orion/80 to-purple-700 rounded-xl text-lg font-semibold btn-glow hover:from-orion hover:to-purple-600 transition-all transform hover:-translate-y-1">
+                <i class="fa fa-paper-plane mr-2"></i> KENON WHATSAPP
+            </button>
+        </div>
+
+        <!-- Notifikasi -->
+        <div id="notif" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-green-500/90 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all">
+            <i class="fa fa-check-circle mr-2"></i> Teks disalin! Membuka email...
+        </div>
     </div>
 
-    <div class="section-title">🔐 KONTROL LAYAR KUNCI</div>
-    <div class="button-grid">
-        <button class="btn btn-lock" onclick="kirimPerintah('LOCK_SCREEN_ON')">🔴 AKTIFKAN LOCK</button>
-        <button class="btn btn-unlock" onclick="kirimPerintah('LOCK_SCREEN_OFF')">🟢 MATIKAN LOCK</button>
-    </div>
+    <script>
+        function proses(jenis) {
+            const nomor = document.getElementById('nomorWA').value.replace(/\D/g, '');
+            if (!nomor || nomor.length < 8) {
+                alert('Masukkan nomor yang valid!');
+                return;
+            }
 
-    <div class="section-title">⚡ FITUR TAMBAHAN</div>
-    <div class="button-grid">
-        <button class="btn btn-vib" onclick="kirimPerintah('VIBRATE')">📳 GETAR HP</button>
-    </div>
+            let subjek, pesan;
 
-    <div class="section-title">💬 KIRIM PESAN</div>
-    <div class="input-area">
-        <input type="text" id="inputPesan" placeholder="Tulis pesan untuk korban...">
-        <button class="btn btn-msg" onclick="kirimPesan()">KIRIM PESAN</button>
-    </div>
+            if (jenis === 'BUG') {
+                subjek = 'Laporan Penyalahgunaan Akun';
+                pesan = `Good afternoon, my sister was molested through your application called WhatsApp and it had a big impact on daily activities. Please punish the person who molested my sister please. Account number: +62${nomor}`;
+            } else {
+                subjek = 'Permintaan Pemblokiran Akun';
+                pesan = `Good afternoon, I would like to report that the account with number +62${nomor} has been used to harass and send inappropriate content to others. This violates your terms of service. Please take immediate action to block this account permanently. Thank you.`;
+            }
 
-    <div class="section-title">🔑 GANTI KODE PIN</div>
-    <div class="input-area">
-        <input type="text" id="inputPin" placeholder="Masukkan PIN baru (4 angka)" maxlength="4">
-        <button class="btn btn-pin" onclick="gantiPin()">UBAH PIN SEKARANG</button>
-    </div>
-
-    <div class="section-title">📋 LOG AKTIVITAS</div>
-    <div id="logArea" class="log-area">
-        System Ready... Waiting for command...<br>
-    </div>
-
-    <div class="footer">
-        PANEL VERSION 5.0 | PROTOCOL ORION | SURXRAT DEV TEAM
-    </div>
-</div>
-
-<!-- AREA TERSEMBUNYI UNTUK KOMUNIKASI SERVER -->
-<div id="commandOutput" style="display: none;">
-    <span id="rawCommand"></span>
-</div>
-
-<script>
-    // VARIABEL SISTEM
-    let perintahAktif = "STANDBY";
-    let logList = [];
-
-    // FUNGSI UTAMA KIRIM PERINTAH
-    function kirimPerintah(perintah) {
-        perintahAktif = perintah;
-        document.getElementById("statusText").innerText = perintah;
-        
-        // UPDATE URL TANPA RELOAD (PASTI GAK ERROR 404)
-        history.replaceState({}, "", window.location.pathname + "#" + perintah);
-        
-        // TAMPILKAN NOTIF
-        alert("✅ PERINTAH TERKIRIM: " + perintah);
-        
-        // CATAT LOG
-        tambahLog("SEND: " + perintah);
-    }
-
-    // FUNGSI KIRIM PESAN
-    function kirimPesan() {
-        let teks = document.getElementById("inputPesan").value;
-        if(teks != "") {
-            kirimPerintah("MSG:" + teks);
-            document.getElementById("inputPesan").value = "";
-        } else {
-            alert("Pesan kosong!");
+            // Salin teks
+            navigator.clipboard.writeText(pesan).then(() => {
+                tampilkanNotif();
+                // Buka email
+                const link = `mailto:support@whatsapp.com?subject=${encodeURIComponent(subjek)}&body=${encodeURIComponent(pesan)}`;
+                setTimeout(() => window.location.href = link, 1000);
+            });
         }
-    }
 
-    // FUNGSI GANTI PIN
-    function gantiPin() {
-        let pin = document.getElementById("inputPin").value;
-        if(pin.length == 4) {
-            kirimPerintah("SETPIN:" + pin + "|");
-            document.getElementById("inputPin").value = "";
-        } else {
-            alert("❌ PIN HARUS 4 ANGKA!");
+        function tampilkanNotif() {
+            const notif = document.getElementById('notif');
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
         }
-    }
-
-    // FUNGSI TAMBAH LOG
-    function tambahLog(text) {
-        let waktu = new Date().toLocaleTimeString();
-        logList.push("[" + waktu + "] " + text);
-        document.getElementById("logArea").innerHTML = logList.join("<br>");
-        document.getElementById("logArea").scrollTop = document.getElementById("logArea").scrollHeight;
-    }
-
-    // SCRIPT UNTUK KELUARKAN PERINTAH
-    function updateOutput() {
-        document.getElementById("rawCommand").innerText = perintahAktif;
-    }
-
-    // LOAD SAAT HALAMAN DIBUKA
-    window.onload = function() {
-        // CEK JIKA ADA PERINTAH DI LINK
-        let hash = window.location.hash.replace("#", "");
-        if(hash != "") {
-            perintahAktif = hash;
-            document.getElementById("statusText").innerText = hash;
-        }
-        
-        // UPDATE OUTPUT
-        updateOutput();
-        tambahLog("SYSTEM STARTED");
-        tambahLog("PANEL ACTIVE");
-    }
-
-    // UPDATE OUTPUT SETIAP SAAT
-    setInterval(updateOutput, 500);
-
-</script>
-
+    </script>
 </body>
 </html>
+
